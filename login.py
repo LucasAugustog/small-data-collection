@@ -127,6 +127,8 @@ class MainFrame(wx.Frame):
         
         sizer = wx.BoxSizer(wx.HORIZONTAL)
         self.label = wx.StaticText(self, label = "Status: Information Not Collected")
+        
+
         sizer.Add(self.label, 1, wx.EXPAND)
 
         self.btn = wx.Button(self, label = "START")
@@ -151,6 +153,7 @@ class MainFrame(wx.Frame):
 
     def onClickMe(self, event):
         self.label.SetLabelText("Status: Collecting Information")
+        self.label.SetBackgroundColour( wx.Colour( 170, 237, 152 ) )
         
         html_content = "https://pt.global.nba.com/boxscore/0042200405/"
         
@@ -171,6 +174,10 @@ class MainFrame(wx.Frame):
             act.send_keys(Keys.PAGE_DOWN).perform()
             time.sleep(0.1)
             act.send_keys(Keys.PAGE_DOWN).perform()
+            time.sleep(0.1)
+            act.send_keys(Keys.PAGE_UP).perform()
+            time.sleep(0.1)
+            act.send_keys(Keys.PAGE_UP).perform()
             time.sleep(0.1)
             l += 1
 
@@ -210,15 +217,19 @@ class MainFrame(wx.Frame):
         driver.quit()
 
         self.label.SetLabelText("Status: Information Collected with success")
+        self.label.SetBackgroundColour( wx.Colour( 170, 237, 152 ) )
         
         sizerInfo = wx.BoxSizer(wx.HORIZONTAL)
         self.showInformations = wx.StaticText(self, label = "Show collected information", pos=(40, 120))
+        self.showInformations.SetBackgroundColour( wx.Colour( 170, 237, 152 ) )
 
         sizerInfo = wx.BoxSizer(wx.HORIZONTAL)
         self.showTeamA = wx.StaticText(self, label = "Team "+nameTeamA+" Points:"+PointsA, pos=(60, 140))
+        self.showTeamA.SetBackgroundColour( wx.Colour( 170, 237, 152 ) )
 
         sizerInfo = wx.BoxSizer(wx.HORIZONTAL)
         self.showTeamB = wx.StaticText(self, label = "Team "+nameTeamB+" Points:"+PointsB, pos=(60, 160))
+        self.showTeamB.SetBackgroundColour( wx.Colour( 170, 237, 152 ) )
         
         data_insert = Games(team=nameTeamA, points=PointsA)
         Session.add(data_insert)
@@ -230,6 +241,7 @@ class MainFrame(wx.Frame):
 
         sizerInfo = wx.BoxSizer(wx.HORIZONTAL)
         self.DataBaseInfo = wx.StaticText(self, label = "Information added to database successfully", pos=(40, 200))
+        self.DataBaseInfo.SetBackgroundColour( wx.Colour( 170, 237, 152 ) )
         
 
 
